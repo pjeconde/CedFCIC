@@ -1,0 +1,34 @@
+﻿@model List<PruebaCore.Entidades.Medio>
+@{
+    ViewData["Title"] = "Medios Lista";
+    var me = ViewData["Medios"] as List<PruebaCore.Entidades.Medio>;
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<ul>
+    @foreach (var item in me)
+    {
+    <li>
+        @item.IdMedio -- @item.DescrMedio
+    </li>
+    }
+</ul>
+<br />
+
+<input list="browsers" type="text" id="myInput" style="width:30%; height:25px; background-color:antiquewhite" class="form-control">
+<datalist id="browsers">
+    @foreach (var item in me)
+    {
+        <option value=@item.IdMedio>@item.IdMedio</option>
+    }
+</datalist>
+
+
+<label class="control-label">Nombre</label>
+<input id="Pepe" list="browsers" class="form-control" />
+<datalist id="browsers">
+    @foreach (var item in me)
+    {
+        <option value=@item.IdMedio>xx @item.DescrMedio</option>
+    }
+</datalist>

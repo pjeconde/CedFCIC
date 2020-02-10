@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PruebaCoreMVC</name>
+    </assembly>
+    <members>
+        <member name="M:PruebaCoreMVC.Controllers.MediosController.Get(System.String)">
+            <summary>
+            Consultar un Id. de Medio
+            </summary>
+            <param name="id">Mail</param>
+            <returns></returns>
+        </member>
+        <member name="M:PruebaCoreMVC.Controllers.MediosController.Get">
+            <summary>
+            Consultar un Id. de Medio
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
