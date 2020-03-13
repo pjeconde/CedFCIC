@@ -1,0 +1,89 @@
+﻿@model CedFCIC.Entidades.Usuario;
+@{
+    ViewData["Title"] = "Crear usuario";
+}
+@using Microsoft.Extensions.Options
+@inject IOptions<ReCAPTCHASettings> GooglereCAPTCHA
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<form asp-action="Crear">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group col-md-6">
+        <label class="control-label">Id.</label>
+        <input asp-for="Id" class="form-control" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="control-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-12">
+        <label class="control-label">Telefono</label>
+        <input asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-12">
+        <label class="control-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-12">
+        <label class="control-label">Pregunta</label>
+        <input asp-for="Pregunta" class="form-control" />
+        <span asp-validation-for="Pregunta" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-12">
+        <label class="control-label">Respuesta</label>
+        <input asp-for="Respuesta" class="form-control" />
+        <span asp-validation-for="Respuesta" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Password" class="control-label"></label>
+        <div class="input-group">
+            <input asp-for="Password" class="form-control" type="password" />
+            <div class="input-group-addon ">
+                <div class="glyphicon glyphicon-eye-open overout"></div>
+            </div>
+        </div>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-12">
+        <label asp-for="EstadoId" class="control-label"></label>
+        <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId"></select>
+    </div>
+    <input asp-for="Token" type="hidden" />
+    <div class="form-group col-md-12">
+        <input type="submit" value="Aceptar" class="btn btn-default " />
+        <a asp-action="Ingresar" asp-controller="Usuario" class="btn btn-default">Volver</a>
+    </div>
+</form>
+<div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@GooglereCAPTCHA.Value.ReCAPTCHA_Site_Key"></script>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('@GooglereCAPTCHA.Value.ReCAPTCHA_Site_Key', {action: 'homepage'}).then(function(token) {
+                console.log(token);
+                $("#Token").val(token);
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("div.overout")
+                .mouseover(function () {
+                    $("#Password").attr("type", "text");
+                })
+                .mouseout(function () {
+                    $("#Password").attr("type", "password");
+                });
+        });
+    </script>
+}

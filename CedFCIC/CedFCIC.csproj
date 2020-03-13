@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreMVC\PruebaCoreMVC.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Home\ContactoForm.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\ContactoForm.cshtml" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\animated.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\core.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\fixed-width.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\font-awesome.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\icons.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\larger.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\list.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\mixins.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\path.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\screen-reader.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\stacked.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\less\variables.less" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_animated.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_core.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_icons.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_larger.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_list.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_mixins.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_path.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_stacked.scss" />
+    <None Include="wwwroot\lib\font-awesome-4.7.0\scss\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CedEX\CedFCICEX.csproj" />
+    <ProjectReference Include="..\CedFCICEntidades\CedFCICEntidades.csproj" />
+    <ProjectReference Include="..\CedFCICRN\CedFCICRN.csproj" />
+    <ProjectReference Include="..\FeaEntidades\FeaEntidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

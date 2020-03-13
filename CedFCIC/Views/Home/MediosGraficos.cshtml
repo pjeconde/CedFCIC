@@ -1,0 +1,52 @@
+﻿@model List<CedFCIC.Entidades.SimpleReportViewModel>
+@{
+    ViewData["Title"] = "Medios graficos - Chart";
+    var me = ViewData["SRVM"] as List<CedFCIC.Entidades.SimpleReportViewModel>;
+}
+@{
+    var XLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.DimensionOne).ToList());
+    var YValues = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Quantity).ToList());
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<label class="control-label">Elegir cantidad a comparar</label>
+<input id="cantidad" list="ddlcantidad" class="form-control" />
+<datalist id="ddlcantidad">
+    <option value=4></option>
+    <option value=5></option>
+    <option value=6></option>
+</datalist>
+<span id="txtCantidad">hola</span>
+<br />
+
+<script>
+    $(document).ready(function () {
+        $("#cantidad").on("change", function () {
+            var a = $("#cantidad").text();
+            if ($("#cantidad").text() == "") { $("#txtCantidad").text("vacio"); }
+            else { $("#txtCantidad").text("cambio"); }
+
+        });
+    });
+</script>
+
+<div class="box-body">
+    <div class="chart-container">
+        @await Component.InvokeAsync("GraficoPie")
+    </div>
+</div>
+<br />
+<div class="box-body">
+    <div class="chart-container">
+        @await Component.InvokeAsync("GraficoBar")
+    </div>
+</div>
+    <p>Hola querido</p>
+<br />
+<div class="box-body">
+    <div class="chart-container">
+        @await Component.InvokeAsync("GraficoDoughnut")
+    </div>
+</div>

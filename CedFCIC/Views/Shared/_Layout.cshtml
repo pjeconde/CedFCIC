@@ -1,0 +1,258 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CedFCIC</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+    <!-- CSS ================================================== -->
+    @*<link rel="stylesheet" href="~/css/base.css" />
+        <link rel="stylesheet" href="~/css/skeleton.css" />
+        <link rel="stylesheet" href="~/css/layout.css" />
+        <link rel="stylesheet" href="~/css/settings.css" />
+        <link rel="stylesheet" href="~/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/owl.carousel.css" />
+        <link rel="stylesheet" href="~/css/retina.css" />
+        <link rel="stylesheet" href="~/css/colorbox.css" />
+        <link rel="stylesheet" href="~/css/animsition.min.css" />
+        <link rel="stylesheet" type="text/css" href="~/css/custom.css">
+        <link rel="alternate stylesheet" type="text/css" href="~/css/colors/color-gold.css" title="1">*@
+
+    @*<link rel="stylesheet" href="/css/menu.css" />*@
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- Inicio DateTime Picker  -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Fin DateTime Picker  -->
+</head>
+<body>
+    <!-- Para los graficos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Plugin para poner los porcentajes. Pagina con ejemplos: https://emn178.github.io/chartjs-plugin-labels/samples/demo/ -->
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <!-- Poper.js es para bootstrap, lo utilizan para los dropdown menu. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    @{
+        var sesion = Context.Session.GetObj<CedFCIC.Entidades.Sesion>("Sesion");
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Cedeira</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contacto">Contacto</a></li>
+                        @*<li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu" style="width:200px;">
+                                    <li> <a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
+                                    <li class="divider"></li>
+                                    <li><a asp-area="" asp-controller="Usuario" asp-action="Ingresar">Ingresar</a></li>
+                                    <li><a asp-area="" asp-controller="Usuario" asp-action="Crear">Crear</a></li>
+                                    <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
+                                    <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                </ul>
+                            </li>*@
+                        <li class="nav-item pull-right">
+                            @if (sesion != null && sesion.Usuario.Id != null && sesion.Usuario.Id.Trim() != "")
+                            {
+                                @Html.ActionLink("[Salir]", "Salir", "Usuario")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("[Ingresar]", "Ingresar", "Usuario")
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        //var usr = Context.Session.GetString("UsuarioId");
+        if (sesion != null && sesion.Usuario.Id != null && sesion.Usuario.Id.Trim() != "")
+        {
+            <nav class="navbar navbar-inverse navbar-static-top navbar-lower">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="nav navbar-nav">
+                            <li runat="server" id="PersonasControl" class="dropdown dropdown-submenu">
+                                <a asp-area="" asp-controller="" asp-action="" class="dropdown-toggle" data-toggle="dropdown" visible="true">Comprobante <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-area="" asp-controller="Comprobante" asp-action="Index" id="ComprobanteConsulta">Consulta</a></li>
+                                </ul>
+                            </li>
+                            <li runat="server" id="ArticulosControl" class="dropdown dropdown-submenu">
+                                <a asp-area="" asp-controller="" asp-action="" data-toggle="dropdown" visible="true">Artículos <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-area="" asp-controller="Articulo" asp-action="Crear" id="ArticuloAlta">Alta</a></li>
+                                    <li><a runat="server" id="ArticulosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                    <li><a asp-area="" asp-controller="Articulo" asp-action="Index" id="ArticuloModif">Modificación</a></li>
+                                    <li><a <a asp-area="" asp-controller="Articulo" asp-action="Index" id="ArticuloConsulta">Consulta</a></li>
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listas de Precios <i class="fa fa-caret-down"></i></a>
+                                        <ul class="dropdown-menu" style="width:200px;">
+                                            <li><a asp-area="" asp-controller="Persona" asp-action="CrearListaPrecios" id="ArticulosListaPreciosAlta">Alta</a></li>
+                                            <li><a runat="server" id="ArticulosListaPreciosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                            <li><a runat="server" id="ArticulosListaPreciosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                            <li><a runat="server" id="ArticulosListaPreciosClonado" visible="false" style="color:lightgray" href="#">Clonado</a></li>
+                                            <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
+                                            <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Precios <i class="fa fa-caret-down"></i></a>
+                                        <ul class="dropdown-menu" style="">
+                                            <li><a runat="server" id="ArticulosPreciosIngresoManual" visible="false" style="color:lightgray" href="#">Ingreso Manual</a></li>
+                                            <li><a runat="server" id="ArticulosPreciosImportExcel" visible="false" style="color:lightgray" href="#">Importar de Excel</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pruebas <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu" style="width:200px;">
+                                    <li><a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
+                                    <li class="divider"></li>
+                                    <li><a asp-area="" asp-controller="Home" asp-action="Medios">Medios</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin.Site <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu" style="width:200px;">
+                                    <li> <a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <font color="white">Cuit:</font>
+                                @*Html.ActionLink(sesion.Usuario.Nombre, "Index", "Factura")*@
+                                @{
+                                    if (sesion.CuitsDelUsuario.Count > 0)
+                                    {
+                                        var items = from CedFCIC.Entidades.Cuit c in sesion.CuitsDelUsuario
+                                                    select new SelectListItem { Value = c.Nro, Text = c.Nro };
+                                        ViewBag.SelectListCU = new SelectList(sesion.CuitsDelUsuario, "Nro", "Nro");
+                                        @Html.DropDownList("CuitsDelUsr", ViewBag.SelectListCU as SelectList)
+                                    }
+                                }
+                                @*@Html.ActionLink(sesion.Usuario.Id + '-' + sesion.Usuario.Nombre, "Index", "Factura");*@
+                            </div>
+                            <div class="form-group">
+                                <font color="white">UN:</font>
+                            </div>
+                        </form>
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="texto a buscar">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">Buscar</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        }
+    }
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <div class="modal fade" id="aModal" tabindex="-1" role="dialog" aria-labelledby="aModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="aModalLabel">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label id="ExMessage"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="amModal" tabindex="-1" role="dialog" aria-labelledby="amModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="amModalLabel">Mensaje</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label id="TxtMessage"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @await Component.InvokeAsync("Pie")
+        <hr />
+        <footer>
+            <p>&copy; 2020 - CedFCIC</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/menu.js"></script>
+        @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<CedFCIC.Entidades.Articulo>
+
+@{
+    ViewData["Title"] = "Consulta de Comprobantes";
+    //var me = ViewData["Medio"] as CedFCIC.Entidades.Medio;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Fecha Desde<input type="text" id="fechaDesdedatepicker" class="form-control" style="width:100px"></p>
+<p>
+    <a asp-action="Crear">Crear nuevo artículo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cuit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnidadDescr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndicacionExentoGravado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlicuotaIVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cuit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnidadDescr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IndicacionExentoGravado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlicuotaIVA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "Modificar", new { Cuit = item.Cuit, Id = item.Id }) |
+                    @Html.ActionLink("Detalle", "Detalle", new { Cuit = item.Cuit, Id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            $("#fechaDesdedatepicker").datepicker();
+        });
+    </script>
+}
+
+

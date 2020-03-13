@@ -1,0 +1,71 @@
+﻿@model CedFCIC.Entidades.UsuarioIngresar;
+@{
+    ViewData["Title"] = "Ingresar Usuario";
+    var sesion = (CedFCIC.Entidades.Sesion)ViewData["Sesion"];
+    //var me = ViewData["Medio"] as CedFCIC.Entidades.Medio;
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+@if (sesion == null || sesion.Usuario == null || sesion.Usuario.Id == null)
+{
+    <div>
+        <form asp-action="Ingresar" id="formLogin">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-6">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Password" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <div class="input-group-addon ">
+                        <div class="glyphicon glyphicon-eye-open overout"></div>
+                    </div>
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <input type="submit" value="Aceptar" class="btn btn-default" />
+                <a asp-action="Index" asp-controller="home" class="btn btn-default">Volver</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12">
+        <p style="text-align: center"><a asp-action="Crear" asp-controller="Usuario">Crear una nueva cuenta</a> - <a asp-action="OlvidoId" asp-controller="Usuario">¿Olvidó su Id.Usuario?</a> - <a asp-action="OlvidoClave" asp-controller="Usuario">¿Olvidó su Contraseña?</a></p>
+    </div>
+}
+else
+{
+    <!-- LOGIN SECTION ================================================== -->
+    <section id="formLoginActivo" class="section footer-1 section-padding-top-bottom" visible="true">
+        <div class="container-fluid" style="text-align: center">
+            <div class="row" style="">
+                <label ID="MensajeSesionActivaLabel" ForeColor="DarkGray">La sesión de @sesion.Usuario.Nombre esta activa.</label>
+            </div>
+            <div class="row" style="display: inline-block; padding:0; margin:0">
+                <div class="four columns" style="display: inline-block; vertical-align:top">
+                    <a asp-action="Index" asp-controller="Factura" class="btn btn-default">CONTINUAR OPERANDO</a>
+                    <a asp-action="Salir" asp-controller="Usuario" class="btn btn-default">SALIR</a>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $("div.overout")
+                .mouseover(function () {
+                    $("#Password").attr("type", "text");
+                })
+                .mouseout(function () {
+                    $("#Password").attr("type", "password");
+                });
+        });
+    </script>
+}

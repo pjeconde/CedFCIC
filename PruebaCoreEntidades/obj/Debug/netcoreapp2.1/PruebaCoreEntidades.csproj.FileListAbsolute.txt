@@ -1,8 +1,0 @@
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\bin\Debug\netcoreapp2.1\PruebaCoreEntidades.deps.json
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\bin\Debug\netcoreapp2.1\PruebaCoreEntidades.dll
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\bin\Debug\netcoreapp2.1\PruebaCoreEntidades.pdb
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\obj\Debug\netcoreapp2.1\PruebaCoreEntidades.csproj.CoreCompileInputs.cache
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\obj\Debug\netcoreapp2.1\PruebaCoreEntidades.AssemblyInfoInputs.cache
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\obj\Debug\netcoreapp2.1\PruebaCoreEntidades.AssemblyInfo.cs
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\obj\Debug\netcoreapp2.1\PruebaCoreEntidades.dll
-C:\Users\Pablo\Documents\Visual Studio 2017\Projects\PruebaCoreMVC\PruebaCoreEntidades\obj\Debug\netcoreapp2.1\PruebaCoreEntidades.pdb

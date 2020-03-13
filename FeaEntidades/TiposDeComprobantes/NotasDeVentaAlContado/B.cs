@@ -1,0 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace FeaEntidades.TiposDeComprobantes.NotasDeVentaAlContado
+{
+    [Serializable]
+    public class B : NotaDeVentaAlContado
+	{
+		public B()
+		{
+			codigo = 10;
+			descr = "Notas de Venta al contado B";
+		}
+	}
+}
