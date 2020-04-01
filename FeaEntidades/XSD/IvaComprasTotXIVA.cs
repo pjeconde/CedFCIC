@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CedServicios.Entidades
+namespace CedFCIC.Entidades
 {
     
     public class IvaComprasTotXIVA

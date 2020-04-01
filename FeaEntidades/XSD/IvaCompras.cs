@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CedServicios.Entidades
+namespace CedFCIC.Entidades
 {
     public class IvaCompras
     {
@@ -10,9 +10,9 @@ namespace CedServicios.Entidades
         string periodoDsd;
         string periodoHst;
 
-        List<CedServicios.Entidades.IvaComprasComprobantes> ivaComprasComprobantes;
-        List<CedServicios.Entidades.IvaComprasTotXImpuestos> ivaComprasTotXImpuestos;
-        List<CedServicios.Entidades.IvaComprasTotXIVA> ivaComprasTotXIVA;
+        List<CedFCIC.Entidades.IvaComprasComprobantes> ivaComprasComprobantes;
+        List<CedFCIC.Entidades.IvaComprasTotXImpuestos> ivaComprasTotXImpuestos;
+        List<CedFCIC.Entidades.IvaComprasTotXIVA> ivaComprasTotXIVA;
 
         public IvaCompras()
         {
@@ -52,7 +52,7 @@ namespace CedServicios.Entidades
             }
         }
         [System.Xml.Serialization.XmlElementAttribute("IvaComprasComprobantes")]
-        public List<CedServicios.Entidades.IvaComprasComprobantes> IvaComprasComprobantes
+        public List<CedFCIC.Entidades.IvaComprasComprobantes> IvaComprasComprobantes
         {
             set
             {
@@ -64,7 +64,7 @@ namespace CedServicios.Entidades
             }
         }
         [System.Xml.Serialization.XmlElementAttribute("IvaComprasTotXImpuestos")]
-        public List<CedServicios.Entidades.IvaComprasTotXImpuestos> IvaComprasTotXImpuestos
+        public List<CedFCIC.Entidades.IvaComprasTotXImpuestos> IvaComprasTotXImpuestos
         {
             set
             {
@@ -76,7 +76,7 @@ namespace CedServicios.Entidades
             }
         }
         [System.Xml.Serialization.XmlElementAttribute("IvaComprasTotXIVA")]
-        public List<CedServicios.Entidades.IvaComprasTotXIVA> IvaComprasTotXIVA
+        public List<CedFCIC.Entidades.IvaComprasTotXIVA> IvaComprasTotXIVA
         {
             set
             {

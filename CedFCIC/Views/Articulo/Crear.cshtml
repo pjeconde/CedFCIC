@@ -7,54 +7,56 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 <form asp-action="Crear">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group col-md-6">
-        <label asp-for="Cuit" class="control-label"></label>
-        <input asp-for="Cuit" class="form-control" readonly="readonly" />
-        <span asp-validation-for="Cuit" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-6">
-        <label asp-for="Id" class="control-label"></label>
-        <input asp-for="Id" class="form-control" />
-        <span asp-validation-for="Id" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="Descr" class="control-label"></label>
-        <input asp-for="Descr" class="form-control" />
-        <span asp-validation-for="Descr" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="GTIN" class="control-label"></label>
-        <input asp-for="GTIN" class="form-control" />
-        <span asp-validation-for="GTIN" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="UnidadId" class="control-label"></label>
-        <select asp-for="UnidadId" class="form-control" asp-items="ViewBag.UnidadId"></select>
-        <span asp-validation-for="UnidadId" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="IndicacionExentoGravadoId" class="control-label"></label>
-        <select asp-for="IndicacionExentoGravadoId" class="form-control" asp-items="ViewBag.IndicacionExentoGravadoId"></select>
-        <span asp-validation-for="IndicacionExentoGravadoId" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="AlicuotaIVA" class="control-label"></label>
-        <input asp-for="AlicuotaIVA" class="form-control" />
-        <span asp-validation-for="AlicuotaIVA" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="EstadoId" class="control-label">Estado</label>
-        <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId" disabled="disabled"></select>
-        <span asp-validation-for="EstadoId" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-12">
-        <input type="submit" value="Aceptar" class="btn btn-default" onclick="this.disabled = true;" />
-        <a asp-action="Index" asp-controller="Factura" class="btn btn-default">Volver</a>
+    <div class="container">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-6">
+                <label asp-for="Cuit" class="control-label"></label>
+                <input asp-for="Cuit" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Cuit" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Descr" class="control-label"></label>
+                <input asp-for="Descr" class="form-control" />
+                <span asp-validation-for="Descr" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="GTIN" class="control-label"></label>
+                <input asp-for="GTIN" class="form-control" />
+                <span asp-validation-for="GTIN" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="UnidadId" class="control-label"></label>
+                <select asp-for="UnidadId" class="form-control" asp-items="ViewBag.UnidadId"></select>
+                <span asp-validation-for="UnidadId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="IndicacionExentoGravadoId" class="control-label"></label>
+                <select asp-for="IndicacionExentoGravadoId" class="form-control" asp-items="ViewBag.IndicacionExentoGravadoId"></select>
+                <span asp-validation-for="IndicacionExentoGravadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="AlicuotaIVA" class="control-label"></label>
+                <input asp-for="AlicuotaIVA" class="form-control" />
+                <span asp-validation-for="AlicuotaIVA" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="EstadoId" class="control-label">Estado</label>
+                <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId" disabled="disabled"></select>
+                <span asp-validation-for="EstadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <input type="submit" value="Aceptar" class="btn btn-outline-primary" />
+                <a asp-action="Index" asp-controller="Factura" class="btn btn-outline-primary">Volver</a>
+            </div>
+        </div>
     </div>
 </form>
-<div>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

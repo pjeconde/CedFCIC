@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+<h2>Pruebas sin layout</h2>
+<h3>@ViewData["Title"]</h3>
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a href="#" class="navbar-brand"></a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#layoutNavbarSupportedContent"
+            aria-controls="layoutNavbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="layoutNavbarSupportedContent">
+        <ul class="navbar-nav">
+            <li runat="server" id="PersonasControl" class="dropdown dropdown-submenu">
+                <a asp-area="" asp-controller="" asp-action="" class="dropdown-toggle" data-toggle="dropdown" visible="true">Comprobante <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="" asp-controller="Comprobante" asp-action="Index" id="ComprobanteConsulta">Consulta</a></li>
+                </ul>
+            </li>
+            <li runat="server" id="ArticulosControl" class="dropdown dropdown-submenu">
+                <a asp-area="" asp-controller="" asp-action="" data-toggle="dropdown" visible="true">Artículos <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="" asp-controller="Articulo" asp-action="Crear" id="ArticuloAlta">Alta</a></li>
+                    <li><a runat="server" id="ArticulosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                    <li><a asp-area="" asp-controller="Articulo" asp-action="Index" id="ArticuloModif">Modificación</a></li>
+                    <li><a asp-area="" asp-controller="Articulo" asp-action="Index" id="ArticuloConsulta">Consulta</a></li>
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listas de Precios <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-menu" style="width:200px;">
+                            <li><a asp-area="" asp-controller="Persona" asp-action="CrearListaPrecios" id="ArticulosListaPreciosAlta">Alta</a></li>
+                            <li><a runat="server" id="ArticulosListaPreciosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                            <li><a runat="server" id="ArticulosListaPreciosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                            <li><a runat="server" id="ArticulosListaPreciosClonado" visible="false" style="color:lightgray" href="#">Clonado</a></li>
+                            <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
+                            <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Precios <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-menu" style="">
+                            <li><a runat="server" id="ArticulosPreciosIngresoManual" visible="false" style="color:lightgray" href="#">Ingreso Manual</a></li>
+                            <li><a runat="server" id="ArticulosPreciosImportExcel" visible="false" style="color:lightgray" href="#">Importar de Excel</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pruebas <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu" style="width:200px;">
+                    <li><a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
+                    <li class="divider"></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Medios">Medios</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="PruebaSinLayout">Medios</a></li>
+                </ul>
+            </li>
+            <li class="dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin.Site <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu" style="width:200px;">
+                    <li> <a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">aaaaaa</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">xxaaaaxx</span>
+    </div>
+</div>
+
+<label for="basic-url">Your vanity URL</label>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+    </div>
+    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+</div>
+
+<br />
+

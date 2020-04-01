@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using CedFCIC.Models;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CedFCIC
 {
@@ -35,8 +35,16 @@ namespace CedFCIC
 
             services.Configure<ReCAPTCHASettings>(Configuration.GetSection("GooglereCAPTCHA"));
             services.AddTransient<reCAPTCHAService>();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages()
+              .AddRazorRuntimeCompilation();
+
+            services.AddMvc()
+              .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+              .AddDataAnnotationsLocalization()
+              .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
@@ -86,16 +94,38 @@ namespace CedFCIC
             }
 
             app.UseStaticFiles();
+            app.UseRouting();       //agregado para .net core 3.0
             app.UseCookiePolicy();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
-            app.UseMvc(routes =>
+            var supportedCultures = new[]
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                new CultureInfo("es-AR")
+                //new CultureInfo("en-GB"),
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("es-AR"),
+                // Formatting numbers, dates, etc.
+                SupportedCultures = supportedCultures,
+                // UI strings that we have localized.
+                SupportedUICultures = supportedCultures
             });
+
+            //.net core 3.0
+            app.UseEndpoints(endpoints =>
+            {
+                //endpoints.MapHub<ChatHub>("/chat"); para usar SignalR
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

@@ -1,90 +1,135 @@
-﻿@model IEnumerable<CedFCIC.Entidades.Articulo>
-
+﻿@model PagedResultComprobante<CedFCIC.Entidades.Comprobante>
 @{
     ViewData["Title"] = "Consulta de Comprobantes";
-    //var me = ViewData["Medio"] as CedFCIC.Entidades.Medio;
 }
-
 <h2>@ViewData["Title"]</h2>
-
-<p>Fecha Desde<input type="text" id="fechaDesdedatepicker" class="form-control" style="width:100px"></p>
-<p>
-    <a asp-action="Crear">Crear nuevo artículo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GTIN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnidadDescr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IndicacionExentoGravado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlicuotaIVA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cuit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GTIN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnidadDescr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IndicacionExentoGravado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlicuotaIVA)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    @Html.ActionLink("Modificar", "Modificar", new { Cuit = item.Cuit, Id = item.Id }) |
-                    @Html.ActionLink("Detalle", "Detalle", new { Cuit = item.Cuit, Id = item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+<h3>@ViewData["Message"]</h3>
+<form asp-action="Index" method="post" autocomplete="off">
+    <div class="container">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-2 col-sm-2">
+                <label asp-for="Filtro.FiltroFechaDesde" class="control-label"></label>
+                <input asp-for="Filtro.FiltroFechaDesde" id="FiltroFechaDesde" name="FiltroFechaDesde" class="form-control" style="width:110px" lang="es-ar" type="text" value="@TempData["FiltroFechaDesde"]" />
+                <span asp-validation-for="Filtro.FiltroFechaDesde" class="text-danger"></span>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label asp-for="Filtro.FiltroFechaHasta" class="control-label"></label>
+                <input asp-for="Filtro.FiltroFechaHasta" id="FiltroFechaHasta" name="FiltroFechaHasta" class="form-control" style="width:110px" lang="es-ar" type="text" value="@TempData["FiltroFechaHasta"]" />
+                <span asp-validation-for="Filtro.FiltroFechaHasta" class="text-danger"></span>
+                @*<label class="control-label">Fecha Hasta</label>
+            <input type="text" name="FiltroFechaHasta" id="FiltroFechaHasta" class="form-control" style="width:100px">*@
+            </div>
+            <div class="form-group col-md-8 col-sm-8">
+                <label asp-for="Filtro.FiltroRazonSocial" class="control-label"></label>
+                <input asp-for="Filtro.FiltroRazonSocial" id="FiltroFechaHasta" name="FiltroRazonSocial" class="form-control" value="@TempData["FiltroRazonSocial"]" />
+                <span asp-validation-for="Filtro.FiltroRazonSocial" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <input type="submit" value="Aceptar" class="btn btn-outline-primary" />
+                <a asp-action="Index" asp-controller="Comprobante" class="btn btn-outline-primary">Volver</a>
+            </div>
+            <div class="form-group col-md-12 col-sm-12">
+                <a asp-action="Crear">Crear nuevo comprobante</a>
+            </div>
+            @if (Model.Lista.Count > 0)
+            {
+                <div class="col-md-12 col-sm-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].Cuit)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].TipoComprobante.Descr)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].NroPuntoVta)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].Nro)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].RazonSocial)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].Moneda)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].Importe)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lista[0].Estado)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Lista)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cuit)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoComprobante.Descr)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NroPuntoVta)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nro)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RazonSocial)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Moneda)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Importe)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Modificar", "Modificar", new { Cuit = item.Cuit, Nro = item.Nro }) |
+                                    @Html.ActionLink("Detalle", "Detalle", new { Cuit = item.Cuit, Id = item.Nro })
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group col-md-12 col-sm-12">
+                    @(await Component.InvokeAsync<CedFCIC.ViewComponents.PagerViewComponent>(Model))
+                </div>
+            }
+        </div>
+    </div>
+</form>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
     <script>
         $(function () {
-            $("#fechaDesdedatepicker").datepicker();
+            var options = $.extend({}, // empty object
+                $.datepicker.regional["es"], {
+                    dateFormat: "dd/mm/yy"
+                } // your custom options
+            );
+            $("#FiltroFechaDesde").datepicker(options);
+        });
+    </script>
+    <script>
+        $(function () {
+            var options = $.extend({}, // empty object
+                $.datepicker.regional["es"], {
+                    dateFormat: "dd/mm/yy"
+                } // your custom options
+            );
+            $("#FiltroFechaHasta").datepicker(options);
         });
     </script>
 }
-
-

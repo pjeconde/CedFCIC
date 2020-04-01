@@ -496,9 +496,9 @@ namespace CedFCIC.RN
         public static void AsignarCuit(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             Sesion.Cuit = Cuit;
-            //Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
-            //Sesion.ClientesDelCuit = RN.Persona.ListaPorCuit(false, CedServicios.Entidades.Enum.TipoPersona.Cliente, Sesion);
-            //Sesion.ProveedoresDelCuit = RN.Persona.ListaPorCuit(false, CedServicios.Entidades.Enum.TipoPersona.Proveedor, Sesion);
+            Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
+            //Sesion.ClientesDelCuit = RN.Persona.ListaPorCuit(false, CedFCIC.Entidades.Enum.TipoPersona.Cliente, Sesion);
+            //Sesion.ProveedoresDelCuit = RN.Persona.ListaPorCuit(false, CedFCIC.Entidades.Enum.TipoPersona.Proveedor, Sesion);
             List<Entidades.UN> estaLaUNEnLaLista = new List<Entidades.UN>();
             if (Sesion.Cuit.UNs.Count != 0)
             {

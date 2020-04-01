@@ -6,37 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CedFCIC</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
-    <!-- CSS ================================================== -->
-    @*<link rel="stylesheet" href="~/css/base.css" />
-        <link rel="stylesheet" href="~/css/skeleton.css" />
-        <link rel="stylesheet" href="~/css/layout.css" />
-        <link rel="stylesheet" href="~/css/settings.css" />
-        <link rel="stylesheet" href="~/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/css/owl.carousel.css" />
-        <link rel="stylesheet" href="~/css/retina.css" />
-        <link rel="stylesheet" href="~/css/colorbox.css" />
-        <link rel="stylesheet" href="~/css/animsition.min.css" />
-        <link rel="stylesheet" type="text/css" href="~/css/custom.css">
-        <link rel="alternate stylesheet" type="text/css" href="~/css/colors/color-gold.css" title="1">*@
-
-    @*<link rel="stylesheet" href="/css/menu.css" />*@
+    @*<link rel="stylesheet" href="~/css/menu.css" />*@
     <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- Inicio DateTime Picker  -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
     <!-- Fin DateTime Picker  -->
 </head>
-<body>
+<body style="background-color: white">
     <!-- Para los graficos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -47,142 +26,161 @@
 
     @{
         var sesion = Context.Session.GetObj<CedFCIC.Entidades.Sesion>("Sesion");
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Cedeira</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contacto">Contacto</a></li>
-                        @*<li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <i class="fa fa-caret-down"></i></a>
-                                <ul class="dropdown-menu" style="width:200px;">
-                                    <li> <a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
-                                    <li class="divider"></li>
-                                    <li><a asp-area="" asp-controller="Usuario" asp-action="Ingresar">Ingresar</a></li>
-                                    <li><a asp-area="" asp-controller="Usuario" asp-action="Crear">Crear</a></li>
-                                    <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
-                                    <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
-                                </ul>
-                            </li>*@
-                        <li class="nav-item pull-right">
-                            @if (sesion != null && sesion.Usuario.Id != null && sesion.Usuario.Id.Trim() != "")
-                            {
-                                @Html.ActionLink("[Salir]", "Salir", "Usuario")
-                            }
-                            else
-                            {
-                                @Html.ActionLink("[Ingresar]", "Ingresar", "Usuario")
-                            }
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a href="~/index.html" class="navbar-brand">Cedeira</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#layoutNavbarSupportedContent"
+                    aria-controls="layoutNavbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="layoutNavbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contacto">Contacto</a></li>
+                    @*<li class="dropdown dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <i class="fa fa-caret-down"></i></a>
+                            <ul class="dropdown-menu" style="width:200px;">
+                                <li> <a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="Usuario" asp-action="Ingresar">Ingresar</a></li>
+                                <li><a asp-area="" asp-controller="Usuario" asp-action="Crear">Crear</a></li>
+                                <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
+                                <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                            </ul>
+                        </li>*@
+                    <li class="nav-item pull-right">
+                        @if (sesion != null && sesion.Usuario.Id != null && sesion.Usuario.Id.Trim() != "")
+                        {
+                            @Html.ActionLink("Salir", "Salir", "Usuario", null, new { @class = "btn btn-success" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Ingresar", "Ingresar", "Usuario", null, new { @class = "btn btn-secondary" })
+                        }
+                    </li>
+                </ul>
             </div>
         </nav>
 
         //var usr = Context.Session.GetString("UsuarioId");
         if (sesion != null && sesion.Usuario.Id != null && sesion.Usuario.Id.Trim() != "")
         {
-            <nav class="navbar navbar-inverse navbar-static-top navbar-lower">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
+                <a href="~/index.html" class="navbar-brand"></a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#layoutNavbarSupportedContent"
+                        aria-controls="layoutNavbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="layoutNavbarSupportedContent">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Comprobante
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a asp-area="" asp-controller="Comprobante" asp-action="Index" class="dropdown-item" id="ComprobanteConsulta">Consulta</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Artículos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a asp-area="" asp-controller="Articulo" asp-action="Crear" class="dropdown-item" id="ArticuloAlta">Alta</a></li>
+                                <li><a href="#" class="dropdown-item" id="ArticulosBajaYAnulBaja" visible="false">Baja/Anul.baja</a></li>
+                                <li><a asp-area="" asp-controller="Articulo" asp-action="Index" class="dropdown-item" id="ArticuloModif">Modificación</a></li>
+                                <li><a asp-area="" asp-controller="Articulo" asp-action="Index" class="dropdown-item" id="ArticuloConsulta">Consulta</a></li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="dropdown-item dropdown-toggle">
+                                        Listas de Precios
+                                    </a>
+                                    <ul class="dropdown-menu" style="width:200px;">
+                                        <li><a asp-area="" asp-controller="Persona" asp-action="CrearListaPrecios" class="dropdown-item" id="ArticulosListaPreciosAlta">Alta</a></li>
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosBajaYAnulBaja">Baja/Anul.baja</a></li>
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosModif" visible="false">Modificación</a></li>
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosClonado" visible="false">Clonado</a></li>
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosReemplazo" visible="false">Reemplazo</a></li>
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosConsulta" visible="false">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Precios</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosPreciosIngresoManual">Ingreso Manual</a></li>
+                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosPreciosImportExcel">Importar de Excel</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pruebas</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:200px;">
+                                <li><a asp-area="" asp-controller="Home" asp-action="MediosGraficos" class="dropdown-item">Medios Graficos</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Medios" class="dropdown-item">Medios</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="PruebaSinLayout" class="dropdown-item">Pruebas Generales</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin.Site</a>
+                            <ul class="dropdown-menu" style="width:200px;">
+                                <li><a asp-area="" asp-controller="Home" asp-action="MediosGraficos" class="dropdown-item">Medios Graficos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-form navbar-right" style="">
+                        <div class="form-inline">
+                            <div class="form-group" style="">
+                                <div class="input-group">
+                                    <label class="form-check-label"><font color="white">Usuario:&nbsp;</font></label>
+                                    @Html.ActionLink(sesion.Usuario.Nombre, "Permisos", "Usuario", null, new { @class = "linkUsr", @style = "" })
+                                    <label class="form-check-label"><font color="white">&nbsp;&nbsp;Cuit:&nbsp;</font></label>
+                                    @*Html.ActionLink(sesion.Usuario.Nombre, "Index", "Factura")*@
+                                    @{
+                                        if (sesion.CuitsDelUsuario.Count > 0)
+                                        {
+                                            var items = from CedFCIC.Entidades.Cuit c in sesion.CuitsDelUsuario
+                                                        select new SelectListItem { Value = c.Nro, Text = c.NroYRazSocCorta };
+                                            ViewBag.SelectListCU = new SelectList(sesion.CuitsDelUsuario, "Nro", "NroYRazSocCorta", sesion.Cuit.Nro);
 
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
+                                            Html.BeginForm("CambiarCUIT", "Usuario");
+                                            @Html.DropDownList("CuitsDelUsrNro", ViewBag.SelectListCU as SelectList, new { onChange = "this.form.submit()", @class = "form-control", @style = "height:25px; padding:0px; font-size: 12px;" });
+                                            Html.EndForm();
 
-                    <div class="collapse navbar-collapse" id="navbar">
-                        <ul class="nav navbar-nav">
-                            <li runat="server" id="PersonasControl" class="dropdown dropdown-submenu">
-                                <a asp-area="" asp-controller="" asp-action="" class="dropdown-toggle" data-toggle="dropdown" visible="true">Comprobante <i class="fa fa-caret-down"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-area="" asp-controller="Comprobante" asp-action="Index" id="ComprobanteConsulta">Consulta</a></li>
-                                </ul>
-                            </li>
-                            <li runat="server" id="ArticulosControl" class="dropdown dropdown-submenu">
-                                <a asp-area="" asp-controller="" asp-action="" data-toggle="dropdown" visible="true">Artículos <i class="fa fa-caret-down"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-area="" asp-controller="Articulo" asp-action="Crear" id="ArticuloAlta">Alta</a></li>
-                                    <li><a runat="server" id="ArticulosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
-                                    <li><a asp-area="" asp-controller="Articulo" asp-action="Index" id="ArticuloModif">Modificación</a></li>
-                                    <li><a <a asp-area="" asp-controller="Articulo" asp-action="Index" id="ArticuloConsulta">Consulta</a></li>
-                                    <li class="dropdown dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listas de Precios <i class="fa fa-caret-down"></i></a>
-                                        <ul class="dropdown-menu" style="width:200px;">
-                                            <li><a asp-area="" asp-controller="Persona" asp-action="CrearListaPrecios" id="ArticulosListaPreciosAlta">Alta</a></li>
-                                            <li><a runat="server" id="ArticulosListaPreciosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
-                                            <li><a runat="server" id="ArticulosListaPreciosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
-                                            <li><a runat="server" id="ArticulosListaPreciosClonado" visible="false" style="color:lightgray" href="#">Clonado</a></li>
-                                            <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
-                                            <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Precios <i class="fa fa-caret-down"></i></a>
-                                        <ul class="dropdown-menu" style="">
-                                            <li><a runat="server" id="ArticulosPreciosIngresoManual" visible="false" style="color:lightgray" href="#">Ingreso Manual</a></li>
-                                            <li><a runat="server" id="ArticulosPreciosImportExcel" visible="false" style="color:lightgray" href="#">Importar de Excel</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pruebas <i class="fa fa-caret-down"></i></a>
-                                <ul class="dropdown-menu" style="width:200px;">
-                                    <li><a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
-                                    <li class="divider"></li>
-                                    <li><a asp-area="" asp-controller="Home" asp-action="Medios">Medios</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin.Site <i class="fa fa-caret-down"></i></a>
-                                <ul class="dropdown-menu" style="width:200px;">
-                                    <li> <a asp-area="" asp-controller="Home" asp-action="MediosGraficos">Medios Graficos</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <form class="navbar-form navbar-right">
-                            <div class="form-group">
-                                <font color="white">Cuit:</font>
-                                @*Html.ActionLink(sesion.Usuario.Nombre, "Index", "Factura")*@
-                                @{
-                                    if (sesion.CuitsDelUsuario.Count > 0)
-                                    {
-                                        var items = from CedFCIC.Entidades.Cuit c in sesion.CuitsDelUsuario
-                                                    select new SelectListItem { Value = c.Nro, Text = c.Nro };
-                                        ViewBag.SelectListCU = new SelectList(sesion.CuitsDelUsuario, "Nro", "Nro");
-                                        @Html.DropDownList("CuitsDelUsr", ViewBag.SelectListCU as SelectList)
+                                            @*Html.DropDownList("CuitsDelUsrNro", ViewBag.SelectListCU as SelectList, new { onChange = "this.form.submit()", Param2 = Model.xxxxx });*@
+                                        }
                                     }
-                                }
-                                @*@Html.ActionLink(sesion.Usuario.Id + '-' + sesion.Usuario.Nombre, "Index", "Factura");*@
+                                    @*@Html.ActionLink(sesion.Usuario.Id + '-' + sesion.Usuario.Nombre, "Index", "Factura");*@
+                                    <label class="form-check-label"><font color="white">&nbsp;&nbsp;UN:&nbsp;</font></label>
+                                    @{
+                                        if (sesion.CuitsDelUsuario.Count > 0)
+                                        {
+                                            var items = from CedFCIC.Entidades.UN c in sesion.Cuit.UNs
+                                                        select new SelectListItem { Value = c.Id.ToString(), Text = c.Descr };
+                                            ViewBag.SelectListUN = new SelectList(sesion.Cuit.UNs, "Id", "Descr", sesion.UN.Id.ToString());
+
+                                            Html.BeginForm("CambiarUN", "Usuario", FormMethod.Post);
+                                            @Html.DropDownList("UNsDelCuitId", ViewBag.SelectListUN as SelectList, new { onchange = "this.form.submit()", @class = "form-control", @style = "height:25px; padding:0px; font-size: 12px;" });
+                                            Html.EndForm();
+
+                                            @*Html.DropDownList("UNsDelCuit", ViewBag.SelectListUN as SelectList, new { onchange = "cambiarUN(this);" });*@
+                                            @*Html.DropDownList("UNsDelCuit", ViewBag.SelectListUN as SelectList, new { onchange = "document.location.href = '/Usuario/CambiarUN?idUN=' + this.options[this.selectedIndex].value;" });*@
+                                            @*Html.DropDownList("UNsDelCuit", ViewBag.SelectListUN as SelectList, new { onchange = "document.location.href = '/Usuario/CambiarUN/' + this.options[this.selectedIndex].value;" });*@
+                                        }
+                                    }
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <font color="white">UN:</font>
-                            </div>
-                        </form>
-                        <form class="navbar-form navbar-right" role="search">
+                        </div>
+                    </div>
+                    @*<form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="texto a buscar">
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-default">Buscar</button>
+                                        <button type="submit" class="btn btn-outline-primary">Buscar</button>
                                     </span>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </form>*@
                 </div>
             </nav>
         }
@@ -190,6 +188,7 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+        <br />
         @RenderBody()
         <div class="modal fade" id="aModal" tabindex="-1" role="dialog" aria-labelledby="aModalLabel"
              aria-hidden="true">
@@ -202,7 +201,7 @@
                         <label id="ExMessage"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -218,17 +217,18 @@
                         <label id="TxtMessage"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
         @await Component.InvokeAsync("Pie")
-        <hr />
-        <footer>
-            <p>&copy; 2020 - CedFCIC</p>
-        </footer>
     </div>
+    <br />
+    <br />
+    <footer class="footer">
+        &copy; 2020 - CedFCIC
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -239,13 +239,13 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+        <script src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
                 integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
         </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
@@ -254,5 +254,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     @RenderSection("Scripts", required: false)
+    
 </body>
 </html>

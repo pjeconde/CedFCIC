@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
-namespace CedServicios.Entidades
+namespace CedFCIC.Entidades
 {
     [Serializable]
     public class Comprobante : ICloneable
@@ -59,7 +58,12 @@ namespace CedServicios.Entidades
         {
             return this.MemberwiseClone();
         }
-
+        [Display(Name = "CUIT")]
+        [MaxLength(11, ErrorMessage = "La longitud debe ser de 11 caracteres.")]
+        [MinLength(11, ErrorMessage = "La longitud debe ser de 11 caracteres.")]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Por favor ingrese solo un valor númerico.")]
+        [Required(ErrorMessage = "El ingreso del cuit es obligatorio.")]
+        [Key]
         public string Cuit
         {
             set

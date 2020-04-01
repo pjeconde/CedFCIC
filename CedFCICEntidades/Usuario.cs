@@ -70,6 +70,9 @@ namespace CedFCIC.Entidades
                 return email;
             }
         }
+        [Display(Name = "Pregunta")]
+        [MaxLength(60, ErrorMessage = "La longitud máxima del nombre es de 60 caracteres")]
+        [Required(ErrorMessage = "La pregunta es obligatoria")]
         public string Pregunta
         {
             set
@@ -81,6 +84,9 @@ namespace CedFCIC.Entidades
                 return pregunta;
             }
         }
+        [Display(Name = "Respuesta")]
+        [MaxLength(60, ErrorMessage = "La longitud máxima del nombre es de 60 caracteres")]
+        [Required(ErrorMessage = "La respuesta de la pregunta es obligatoria")]
         public string Respuesta
         {
             set

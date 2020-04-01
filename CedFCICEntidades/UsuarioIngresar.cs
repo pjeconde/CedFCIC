@@ -30,7 +30,7 @@ namespace CedFCIC.Entidades
         }
         [Display(Name = "Clave")]
         [MaxLength(50, ErrorMessage = "La longitud máxima de la clave es de 50 caracteres")]
-        [Required(ErrorMessage = "La identificación de la clave es obligatoria")]
+        [Required(ErrorMessage = "El ingreso de la clave es obligatoria")]
         [MinLength(6, ErrorMessage = "La longitud mínima de la clave debe ser de 6 caracteres")]
         [DataType(DataType.Password)]
         public string Password

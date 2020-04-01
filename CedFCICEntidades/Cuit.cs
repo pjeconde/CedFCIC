@@ -278,6 +278,20 @@ namespace CedFCIC.Entidades
                 return nro + "-" + razonSocial;
             }
         }
+        public string NroYRazSocCorta
+        {
+            get
+            {
+                if (razonSocial == null || razonSocial.Length <= 20)
+                {
+                    return nro + "-" + razonSocial;
+                }
+                else
+                {
+                    return nro + "-" + razonSocial.Substring(0, 20);
+                }
+            }
+        }
         #endregion
 
     }

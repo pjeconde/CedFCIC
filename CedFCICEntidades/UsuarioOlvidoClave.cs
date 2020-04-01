@@ -40,6 +40,7 @@ namespace CedFCIC.Entidades
                 return pregunta;
             }
         }
+        [Required(ErrorMessage = "La respuesta de la pregunta es obligatoria")]
         public string Respuesta
         {
             set

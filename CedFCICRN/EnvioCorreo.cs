@@ -9,7 +9,7 @@ namespace CedFCIC.RN
 {
     public class EnvioCorreo
     {
-        public static void ConfirmacionAltaUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        public static void ConfirmacionAltaUsuario(Entidades.UsuarioCrear Usuario, Entidades.Sesion Sesion)
         {
             SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
@@ -24,7 +24,7 @@ namespace CedFCIC.RN
             a.Append("<br />");
             a.Append("Para confirmar el alta, haga clic en el enlace que aparece a continuación:<br />");
             a.Append("<br />");
-            string link = Sesion.URLsite + "UsuarioConfirmacion.aspx?Id=" + RN.Funciones.Encriptar(Usuario.Id);
+            string link = "http://" + Sesion.URLsite + "/Usuario/Confirmar?Id=" + RN.Funciones.Encriptar(Usuario.Id);
             char c = (char)34;
             a.Append("<a class=" + c + "link" + c + " href=" + c + link + c + ">" + link + "</a><br />");
             a.Append("<br />");

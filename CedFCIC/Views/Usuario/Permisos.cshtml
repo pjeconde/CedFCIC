@@ -1,0 +1,71 @@
+﻿@model CedFCIC.Entidades.Sesion
+@{
+    ViewData["Title"] = Model.Usuario.Nombre;
+}
+
+<h2>@ViewData["Title"]</h2>
+<br />
+<form asp-action="Configurar" method="get" >
+    <div class="form-group col-md-12 center">
+        <label asp-for="Usuario.Id" class="control-label"></label>
+        <label class="control-label">@Model.Usuario.Id</label>
+    </div>
+    <div class="form-group col-md-12 center">
+        <label asp-for="Usuario.Email" class="control-label"></label>
+        <label class="control-label">@Model.Usuario.Email</label>
+    </div>
+    <div class="form-group col-md-12 center">
+        <label asp-for="Usuario.Telefono" class="control-label"></label>
+        <label class="control-label">@Model.Usuario.Telefono</label>
+    </div>
+    <div class="form-group col-md-12">
+        <table class="table center" border="1" >
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario.Permisos[0].DescrTipoPermiso)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario.Permisos[0].DescrUN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario.Permisos[0].Cuit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario.Permisos[0].Estado)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Usuario.Permisos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescrTipoPermiso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescrUN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cuit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group col-md-12">
+        <input type="submit" value="Aceptar" class="btn btn-outline-primary" />
+        <a asp-action="Index" asp-controller="Factura" class="btn btn-outline-primary">Volver</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+

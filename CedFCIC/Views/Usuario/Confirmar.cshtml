@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Confirmación del alta de la cuenta";
+}
+<style>
+    .multiline {
+        white-space: pre-wrap;
+    }
+</style>
+<h2>@ViewData["Title"]</h2>
+<div>
+    @if (ViewData["ConfirmarRespuesta"].ToString() != "")
+    {
+    <div>
+        <br />
+        <h4>@Html.Raw(@ViewData["ConfirmarRespuesta"])</h4>
+        <br />
+        <a asp-action="Ingresar" asp-controller="Usuario">INGRESAR</a>
+    </div>
+    }
+    else
+    {
+    <div>
+        <br />
+        <h4>Problemas para realizar la confirmación del usuario.</h4>
+        <br />
+        <a asp-action="Index" asp-controller="Home">ACEPTAR</a>
+    </div>
+    }
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+

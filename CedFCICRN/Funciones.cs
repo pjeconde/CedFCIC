@@ -37,75 +37,109 @@ namespace CedFCIC.RN
             }
             return sb.ToString();
         }
-        public static string Encriptar(string text)
+
+        private static byte[] Clave = Encoding.ASCII.GetBytes("gaHsjMfgsjKgsjyh");
+        private static byte[] IV = Encoding.ASCII.GetBytes("Devjoker7.37hAES");
+
+        public static string Encriptar(string Cadena)
         {
-            return Encriptar(text, "srgerg$%^bg");
-        }
-        public static string Encriptar(string text, string key)
-        {
-            var _key = Encoding.UTF8.GetBytes(key);
-            using (var aes = Aes.Create())
+            byte[] inputBytes = Encoding.ASCII.GetBytes(Cadena);
+            byte[] encripted;
+            RijndaelManaged cripto = new RijndaelManaged();
+            using (MemoryStream ms = new MemoryStream(inputBytes.Length))
             {
-                using (var encryptor = aes.CreateEncryptor(_key, aes.IV))
+                using (CryptoStream objCryptoStream = new CryptoStream(ms, cripto.CreateEncryptor(Clave, IV), CryptoStreamMode.Write))
                 {
-                    using (var ms = new MemoryStream())
+                    objCryptoStream.Write(inputBytes, 0, inputBytes.Length);
+                    objCryptoStream.FlushFinalBlock();
+                    objCryptoStream.Close();
+                }
+                encripted = ms.ToArray();
+            }
+            return Convert.ToBase64String(encripted);
+        }
+
+        public static string Desencriptar(string Cadena)
+        {
+            byte[] inputBytes = Convert.FromBase64String(Cadena);
+            byte[] resultBytes = new byte[inputBytes.Length];
+            string textoLimpio = String.Empty;
+            RijndaelManaged cripto = new RijndaelManaged();
+            using (MemoryStream ms = new MemoryStream(inputBytes))
+            {
+                using (CryptoStream objCryptoStream = new CryptoStream(ms, cripto.CreateDecryptor(Clave, IV), CryptoStreamMode.Read))
+                {
+                    using (StreamReader sr = new StreamReader(objCryptoStream, true))
                     {
-                        using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                        {
-                            using (var sw = new StreamWriter(cs))
-                            {
-                                sw.Write(text);
-                            }
-                        }
-                        var iv = aes.IV;
-                        var encrypted = ms.ToArray();
-                        var result = new byte[iv.Length + encrypted.Length];
-                        Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
-                        Buffer.BlockCopy(encrypted, 0, result, iv.Length, encrypted.Length);
-                        return Convert.ToBase64String(result);
+                        textoLimpio = sr.ReadToEnd();
                     }
                 }
             }
+            return textoLimpio;
         }
-        public static string Desencriptar(string encrypted)
-        {
-            return Desencriptar(encrypted, "srgerg$%^bg");
-        }
-        public static string Desencriptar(string encrypted, string key)
-        {
-            var b = Convert.FromBase64String(encrypted);
-            var iv = new byte[16];
-            var cipher = new byte[16];
-            Buffer.BlockCopy(b, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(b, iv.Length, cipher, 0, iv.Length);
-            var _key = Encoding.UTF8.GetBytes(key);
-            using (var aes = Aes.Create())
-            {
-                using (var decryptor = aes.CreateDecryptor(_key, iv))
-                {
-                    var result = string.Empty;
-                    using (var ms = new MemoryStream(cipher))
-                    {
-                        using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                        {
-                            using (var sr = new StreamReader(cs))
-                            {
-                                result = sr.ReadToEnd();
-                            }
-                        }
-                    }
-                    return result;
-                }
-            }
-        }
-        //public static string Encriptar(string texto)
-        //{
-        //    return Encryptor.Encrypt(texto, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
         //}
-        //public static string Desencriptar(string texto)
+        //public static string Encriptar(string text)
         //{
-        //    return Encryptor.Decrypt(texto, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
+        //    return Encriptar(text, "au001e7Hfj5v34qa");
         //}
+        //public static string Encriptar(string text, string key)
+        //{
+        //    var _key = Encoding.UTF8.GetBytes(key);
+        //    using (var aes = Aes.Create())
+        //    {
+        //        using (var encryptor = aes.CreateEncryptor(_key, aes.IV))
+        //        {
+        //            using (var ms = new MemoryStream())
+        //            {
+        //                using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+        //                {
+        //                    using (var sw = new StreamWriter(cs))
+        //                    {
+        //                        sw.Write(text);
+        //                    }
+        //                }
+        //                var iv = aes.IV;
+        //                var encrypted = ms.ToArray();
+        //                var result = new byte[iv.Length + encrypted.Length];
+        //                Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
+        //                Buffer.BlockCopy(encrypted, 0, result, iv.Length, encrypted.Length);
+        //                return Convert.ToBase64String(result);
+        //            }
+        //        }
+        //    }
+        //}
+        //public static string Desencriptar(string encrypted)
+        //{
+        //    return Desencriptar(encrypted, "au001e7Hfj5v34qa");
+        //}
+        //public static string Desencriptar(string encrypted, string key)
+        //{
+        //    var b = Convert.FromBase64String(encrypted);
+        //    var iv = new byte[16];
+        //    var cipher = new byte[16];
+        //    Buffer.BlockCopy(b, 0, iv, 0, iv.Length);
+        //    Buffer.BlockCopy(b, iv.Length, cipher, 0, iv.Length);
+        //    var _key = Encoding.UTF8.GetBytes(key);
+        //    using (var aes = Aes.Create())
+        //    {
+        //        using (var decryptor = aes.CreateDecryptor(_key, iv))
+        //        {
+        //            var result = string.Empty;
+        //            using (var ms = new MemoryStream(cipher))
+        //            {
+        //                using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+        //                {
+        //                    using (var sr = new StreamReader(cs))
+        //                    {
+        //                        result = sr.ReadToEnd();
+        //                    }
+        //                }
+        //            }
+        //            return result;
+        //        }
+        //    }
+        //}
+        
         public static string HexToString(string Hex)
         {
             Hex = Hex.Replace("%", "");

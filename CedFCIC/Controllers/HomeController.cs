@@ -59,6 +59,12 @@ namespace CedFCIC.Controllers
             return View(sr);
 
         }
+        [HttpGet]
+        public IActionResult PruebaSinLayout()
+        {
+            ViewData["Message"] = "Your medios graficos page.";
+            return View();
+        }
         public Entidades.Sesion CrearSesion()
         {
             Entidades.Sesion s = new Entidades.Sesion();
@@ -68,6 +74,7 @@ namespace CedFCIC.Controllers
             s.Opciones = CedFCIC.RN.Sesion.Opciones(s);
             s.OpcionesHabilitadas = CedFCIC.RN.Sesion.OpcionesHabilitadas(s);
             s.Usuario = new Entidades.Usuario();
+            s.URLsite = HttpContext.Request.Host.Value.ToString();  //HttpContext.Request.Path.Value.ToString();
             HttpContext.Session.Set("UsuarioId", System.Text.UTF8Encoding.UTF8.GetBytes(Environment.UserName));
             HttpContext.Session.SetObj("Sesion", s);
             return s;

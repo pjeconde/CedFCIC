@@ -89,7 +89,7 @@ namespace CedFCIC.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = Desde["UltActualiz"].ToString();
         }
-        public void Crear(Entidades.Usuario Usuario)
+        public void Crear(Entidades.UsuarioCrear Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");

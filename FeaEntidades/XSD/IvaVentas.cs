@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CedServicios.Entidades
+namespace CedFCIC.Entidades
 {
     public class IvaVentas
     {
@@ -10,9 +10,9 @@ namespace CedServicios.Entidades
         string periodoDsd;
         string periodoHst;
         
-        List<CedServicios.Entidades.IvaVentasComprobantes> ivaVentasComprobantes;
-        List<CedServicios.Entidades.IvaVentasTotXImpuestos> ivaVentasTotXImpuestos;
-        List<CedServicios.Entidades.IvaVentasTotXIVA> ivaVentasTotXIVA;
+        List<CedFCIC.Entidades.IvaVentasComprobantes> ivaVentasComprobantes;
+        List<CedFCIC.Entidades.IvaVentasTotXImpuestos> ivaVentasTotXImpuestos;
+        List<CedFCIC.Entidades.IvaVentasTotXIVA> ivaVentasTotXIVA;
 
         public IvaVentas()
         {
@@ -52,7 +52,7 @@ namespace CedServicios.Entidades
             }
         }
         [System.Xml.Serialization.XmlElementAttribute("IvaVentasComprobantes")]
-        public List<CedServicios.Entidades.IvaVentasComprobantes> IvaVentasComprobantes
+        public List<CedFCIC.Entidades.IvaVentasComprobantes> IvaVentasComprobantes
         {
             set
             {
@@ -64,7 +64,7 @@ namespace CedServicios.Entidades
             }
         }
         [System.Xml.Serialization.XmlElementAttribute("IvaVentasTotXImpuestos")]
-        public List<CedServicios.Entidades.IvaVentasTotXImpuestos> IvaVentasTotXImpuestos
+        public List<CedFCIC.Entidades.IvaVentasTotXImpuestos> IvaVentasTotXImpuestos
         {
             set
             {
@@ -76,7 +76,7 @@ namespace CedServicios.Entidades
             }
         }
         [System.Xml.Serialization.XmlElementAttribute("IvaVentasTotXIVA")]
-        public List<CedServicios.Entidades.IvaVentasTotXIVA> IvaVentasTotXIVA
+        public List<CedFCIC.Entidades.IvaVentasTotXIVA> IvaVentasTotXIVA
         {
             set
             {
