@@ -137,9 +137,9 @@ namespace CedFCIC.Controllers
                 sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
                 articulo = RN.Articulo.Leer(cuit, id, true, sesion);
                 ViewData["Message"] = "";
-                CompletarComboEstado(articulo.Estado);
-                CompletarComboUnidad(articulo.Unidad.Id);
-                CompletarComboIndicacionExentoGravado(articulo.IndicacionExentoGravado);
+                //CompletarComboEstado(articulo.Estado);
+                //CompletarComboUnidad(articulo.Unidad.Id);
+                //CompletarComboIndicacionExentoGravado(articulo.IndicacionExentoGravado);
             }
             else
             {
@@ -153,7 +153,7 @@ namespace CedFCIC.Controllers
         {
             if (cuit == null || id == null)
             {
-                return NotFound();
+                TempData["Ex"] = "Problemas para obtener la identificación del artículo";
             }
             Entidades.Sesion sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
             CedFCIC.Entidades.Articulo articulo = new CedFCIC.Entidades.Articulo();
@@ -211,8 +211,75 @@ namespace CedFCIC.Controllers
             CompletarComboEstado(articulo.EstadoId);
             CompletarComboUnidad(articulo.UnidadId);
             CompletarComboIndicacionExentoGravado(articulo.IndicacionExentoGravadoId);
-            return View();
+            return View(articulo);
         }
 
+        [HttpGet]
+        public IActionResult Baja(string cuit, string id)
+        {
+            if (cuit == null || id == null)
+            {
+                TempData["Ex"] = "Problemas para obtener la identificación del artículo";
+            }
+            Entidades.Sesion sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
+            CedFCIC.Entidades.Articulo articulo = new CedFCIC.Entidades.Articulo();
+            if (Funciones.SessionOK(sesion))
+            {
+                _RequestHandler.HandleAboutRequest();
+                sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
+                articulo = RN.Articulo.Leer(cuit, id, true, sesion);
+                ViewData["WFId"] = articulo.WFId;
+                if (articulo.EstadoId == "Baja")
+                {
+                    ViewData["Accion"] = "AnulBaja";
+                    ViewData["AccionDescr"] = "Anulación de Baja";
+                }
+                else
+                {
+                    ViewData["Accion"] = "Baja";
+                    ViewData["AccionDescr"] = "Baja";
+                }
+                ViewData["Message"] = "";
+            }
+            else
+            {
+                TempData["Ex"] = "Sesion finalizada por timeout.";
+                return RedirectToAction("Ingresar", "Usuario");
+            }
+            return View(articulo);
+        }
+        [HttpPost]
+        public IActionResult Baja(string accion, CedFCIC.Entidades.Articulo articulo)
+        {
+            try
+            {
+                Entidades.Sesion sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
+                if (Funciones.SessionOK(sesion))
+                {
+                    if (accion == "Baja")
+                    { 
+                        RN.Articulo.CambiarEstado(articulo, "DeBaja", sesion);
+                        string resp = "Baja del artículo realizada satisfactoriamente.";
+                        ViewData["TextoMensaje"] = resp;
+                    }
+                    else
+                    {
+                        RN.Articulo.CambiarEstado(articulo, "Vigente", sesion);
+                        string resp = "Anulación de la Baja del artículo realizada satisfactoriamente.";
+                        ViewData["TextoMensaje"] = resp;
+                    }
+                }
+                else
+                {
+                    TempData["Ex"] = "Sesion finalizada por timeout.";
+                    return RedirectToAction("Ingresar", "Usuario");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["Ex"] = ex.Message;
+            }
+            return View(articulo);
+        }
     }
 }

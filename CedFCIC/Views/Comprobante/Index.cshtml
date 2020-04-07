@@ -1,4 +1,4 @@
-﻿@model PagedResultComprobante<CedFCIC.Entidades.Comprobante>
+﻿@model PagedResult<CedFCIC.Entidades.Comprobante, CedFCIC.Models.ComprobanteFiltro>
 @{
     ViewData["Title"] = "Consulta de Comprobantes";
 }
@@ -10,19 +10,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-2 col-sm-2">
                 <label asp-for="Filtro.FiltroFechaDesde" class="control-label"></label>
-                <input asp-for="Filtro.FiltroFechaDesde" id="FiltroFechaDesde" name="FiltroFechaDesde" class="form-control" style="width:110px" lang="es-ar" type="text" value="@TempData["FiltroFechaDesde"]" />
+                <input asp-for="Filtro.FiltroFechaDesde" id="FiltroFechaDesde" name="FiltroFechaDesde" class="form-control" style="width:110px" lang="es-ar" type="text" value="@Model.Filtro.FiltroFechaDesde" />
                 <span asp-validation-for="Filtro.FiltroFechaDesde" class="text-danger"></span>
             </div>
             <div class="col-md-2 col-sm-2">
                 <label asp-for="Filtro.FiltroFechaHasta" class="control-label"></label>
-                <input asp-for="Filtro.FiltroFechaHasta" id="FiltroFechaHasta" name="FiltroFechaHasta" class="form-control" style="width:110px" lang="es-ar" type="text" value="@TempData["FiltroFechaHasta"]" />
+                <input asp-for="Filtro.FiltroFechaHasta" id="FiltroFechaHasta" name="FiltroFechaHasta" class="form-control" style="width:110px" lang="es-ar" type="text" value="@Model.Filtro.FiltroFechaHasta" />
                 <span asp-validation-for="Filtro.FiltroFechaHasta" class="text-danger"></span>
                 @*<label class="control-label">Fecha Hasta</label>
-            <input type="text" name="FiltroFechaHasta" id="FiltroFechaHasta" class="form-control" style="width:100px">*@
+                    <input type="text" name="FiltroFechaHasta" id="FiltroFechaHasta" class="form-control" style="width:100px">*@
             </div>
             <div class="form-group col-md-8 col-sm-8">
                 <label asp-for="Filtro.FiltroRazonSocial" class="control-label"></label>
-                <input asp-for="Filtro.FiltroRazonSocial" id="FiltroFechaHasta" name="FiltroRazonSocial" class="form-control" value="@TempData["FiltroRazonSocial"]" />
+                <input asp-for="Filtro.FiltroRazonSocial" id="FiltroFechaHasta" name="FiltroRazonSocial" class="form-control" value="@Model.Filtro.FiltroRazonSocial" />
                 <span asp-validation-for="Filtro.FiltroRazonSocial" class="text-danger"></span>
             </div>
             <div class="form-group col-md-12">
@@ -68,36 +68,36 @@
                         <tbody>
                             @foreach (var item in Model.Lista)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Cuit)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TipoComprobante.Descr)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NroPuntoVta)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nro)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RazonSocial)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Moneda)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Importe)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Estado)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Modificar", "Modificar", new { Cuit = item.Cuit, Nro = item.Nro }) |
-                                    @Html.ActionLink("Detalle", "Detalle", new { Cuit = item.Cuit, Id = item.Nro })
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cuit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoComprobante.Descr)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NroPuntoVta)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nro)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RazonSocial)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Moneda)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Importe)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Estado)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Modificar", "Modificar", new { Cuit = item.Cuit, Nro = item.Nro }) |
+                                        @Html.ActionLink("Detalle", "Detalle", new { Cuit = item.Cuit, Id = item.Nro })
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -109,15 +109,25 @@
         </div>
     </div>
 </form>
+<form asp-action="ExportarAExcel" method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="padding-top:10px;">
+                <button type="submit" class="btn btn-outline-primary" @ViewBag.Boton1ReadOnly>Exportar a Excel</button>
+            </div>
+        </div>
+        <div id="divData"></div>
+    </div>
+</form>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+
     <script>
         $(function () {
             var options = $.extend({}, // empty object
                 $.datepicker.regional["es"], {
-                    dateFormat: "dd/mm/yy"
-                } // your custom options
+                dateFormat: "dd/mm/yy"
+            } // your custom options
             );
             $("#FiltroFechaDesde").datepicker(options);
         });
@@ -126,8 +136,8 @@
         $(function () {
             var options = $.extend({}, // empty object
                 $.datepicker.regional["es"], {
-                    dateFormat: "dd/mm/yy"
-                } // your custom options
+                dateFormat: "dd/mm/yy"
+            } // your custom options
             );
             $("#FiltroFechaHasta").datepicker(options);
         });

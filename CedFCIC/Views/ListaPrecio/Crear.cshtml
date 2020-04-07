@@ -1,0 +1,51 @@
+﻿@model CedFCIC.Entidades.ListaPrecio;
+@{
+    ViewData["Title"] = "Crear lista de precios";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<form asp-action="Crear">
+    <div class="container">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-6">
+                <label asp-for="Cuit" class="control-label"></label>
+                <input asp-for="Cuit" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Cuit" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Descr" class="control-label"></label>
+                <input asp-for="Descr" class="form-control" />
+                <span asp-validation-for="Descr" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Orden" class="control-label"></label>
+                <input asp-for="Orden" class="form-control" />
+                <span asp-validation-for="Orden" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="IdTipo" class="control-label"></label>
+                <select asp-for="IdTipo" class="form-control" asp-items="ViewBag.TipoLista"></select>
+                <span asp-validation-for="IdTipo" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="WF.Estado" class="control-label">Estado</label>
+                <select asp-for="WF.Estado" class="form-control" asp-items="ViewBag.Estados" disabled="disabled"></select>
+                <span asp-validation-for="WF.Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <input type="submit" value="Aceptar" class="btn btn-outline-primary" @ViewBag.Boton1ReadOnly/>
+                <a asp-action="Index" asp-controller="Factura" class="btn btn-outline-primary">Volver</a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

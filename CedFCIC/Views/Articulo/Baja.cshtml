@@ -1,0 +1,78 @@
+﻿@model CedFCIC.Entidades.Articulo;
+@{
+    ViewData["Title"] = ViewData["AccionDescr"] + " del Artículo";
+}
+
+<h2>@ViewData["Title"]</h2><h5> (WF: @ViewBag.WFId)</h5>
+<form asp-action="Baja" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <h4></h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cuit)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Cuit)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Id)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Descr)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Descr)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GTIN)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.GTIN)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IndicacionExentoGravado)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IndicacionExentoGravado)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UnidadDescr)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.UnidadDescr)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Estado)
+                    </dd>
+                </dl>
+            </div>
+            <div class="form-group col-md-12">
+                @{
+                    if (ViewData["Accion"].ToString() == "Baja")
+                    {
+                        @Html.ActionLink("Anulación de Baja", "Baja", "Articulo", new { Id = Model.Cuit, Cuit = Model.Id, Accion = "AnulBaja" }, new { @class = "btn btn-outline-primary" });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Baja", "Baja", "Articulo", new { Id = Model.Cuit, Cuit = Model.Id, Accion = "Baja"}, new { @class = "btn btn-outline-primary" });
+                    }
+                }
+                <a asp-action="Index" class="btn btn-outline-primary">Volver</a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+

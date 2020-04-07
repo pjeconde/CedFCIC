@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace CedFCIC.Models
 {
-    public class PagedResult<T> : PagedResultBase where T : class 
+    public class PagedResult<T, T2> : PagedResultBase where T : class 
     {
-        //public List<T> Lista { get; set; }
-        //public PagedResult()
-        //{
-        //    Lista = new List<T>();
-        //}
         public List<T> Lista { get; set; }
+        public T2 Filtro { get; set; }
         public PagedResult()
         {
-            //Filtros = new CedFCIC.Models.ComprobanteFiltro();
             Lista = new List<T>();
         }
     }

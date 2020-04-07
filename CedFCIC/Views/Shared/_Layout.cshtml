@@ -86,7 +86,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a asp-area="" asp-controller="Articulo" asp-action="Crear" class="dropdown-item" id="ArticuloAlta">Alta</a></li>
-                                <li><a href="#" class="dropdown-item" id="ArticulosBajaYAnulBaja" visible="false">Baja/Anul.baja</a></li>
+                                <li><a asp-area="" asp-controller="Articulo" asp-action="Index" class="dropdown-item" id="ArticulosBajaYAnulBaja" visible="false">Baja/Anul.baja</a></li>
                                 <li><a asp-area="" asp-controller="Articulo" asp-action="Index" class="dropdown-item" id="ArticuloModif">Modificación</a></li>
                                 <li><a asp-area="" asp-controller="Articulo" asp-action="Index" class="dropdown-item" id="ArticuloConsulta">Consulta</a></li>
                                 <li class="dropdown-submenu">
@@ -94,19 +94,19 @@
                                         Listas de Precios
                                     </a>
                                     <ul class="dropdown-menu" style="width:200px;">
-                                        <li><a asp-area="" asp-controller="Persona" asp-action="CrearListaPrecios" class="dropdown-item" id="ArticulosListaPreciosAlta">Alta</a></li>
+                                        <li><a asp-area="" asp-controller="ListaPrecio" asp-action="Crear" class="dropdown-item" id="ArticulosListaPreciosAlta">Alta</a></li>
                                         <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosBajaYAnulBaja">Baja/Anul.baja</a></li>
                                         <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosModif" visible="false">Modificación</a></li>
                                         <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosClonado" visible="false">Clonado</a></li>
                                         <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosReemplazo" visible="false">Reemplazo</a></li>
-                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosListaPreciosConsulta" visible="false">Consulta</a></li>
+                                        <li><a asp-area="" asp-controller="ListaPrecio" asp-action="Index" class="dropdown-item" id="ListaPrecioConsulta">Consulta</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
                                     <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Precios</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#" class="dropdown-item disabled" id="ArticulosPreciosIngresoManual">Ingreso Manual</a></li>
-                                        <li><a href="#" class="dropdown-item disabled" id="ArticulosPreciosImportExcel">Importar de Excel</a></li>
+                                        <li><a asp-area="" asp-controller="ListaPrecio" asp-action="Importar" class="dropdown-item" id="ArticulosPreciosImportExcel">Importar de Excel</a></li>
                                     </ul>
                                 </li>
                             </ul>
