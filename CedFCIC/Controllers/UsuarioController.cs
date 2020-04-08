@@ -181,6 +181,10 @@ namespace CedFCIC.Controllers
                 if (ex.InnerException == null)
                 {
                     ViewData["Ex"] = ex.Message;
+                    //if (ex.StackTrace.ToString() != null)
+                    //{
+                    //    ViewData["Ex"] = ViewData["Ex"] + ex.StackTrace.ToString();
+                    //}
                 }
                 else
                 {

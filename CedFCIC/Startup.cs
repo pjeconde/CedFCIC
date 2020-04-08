@@ -95,7 +95,7 @@ namespace CedFCIC
 
             app.UseStaticFiles();
             app.UseRouting();       //agregado para .net core 3.0
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
             app.UseSession();
             //app.UseMvcWithDefaultRoute();
 

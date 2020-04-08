@@ -19,15 +19,24 @@
             </div>
             <div class="form-group col-md-12">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <div class="input-group">
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <div class="fa fa-eye-slash overout1"></div>
+                        </div>
+                    </div>
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group col-md-12">
                 <label asp-for="PasswordNueva" class="control-label"></label>
                 <div class="input-group">
                     <input asp-for="PasswordNueva" class="form-control" type="password" />
-                    <div class="input-group-addon ">
-                        <div class="glyphicon glyphicon-eye-open overout"></div>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <div class="fa fa-eye-slash overout2"></div>
+                        </div>
                     </div>
                 </div>
                 <span asp-validation-for="PasswordNueva" class="text-danger"></span>
@@ -36,8 +45,10 @@
                 <label asp-for="PasswordConfirmacion" class="control-label"></label>
                 <div class="input-group">
                     <input asp-for="PasswordConfirmacion" class="form-control" type="password" />
-                    <div class="input-group-addon ">
-                        <div class="glyphicon glyphicon-eye-open overout"></div>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <div class="fa fa-eye-slash overout2"></div>
+                        </div>
                     </div>
                 </div>
                 <span asp-validation-for="PasswordConfirmacion" class="text-danger"></span>
@@ -55,7 +66,14 @@
 
     <script>
         $(document).ready(function () {
-            $("div.overout")
+            $("div.overout1")
+                .mouseover(function () {
+                    $("#Password").attr("type", "text");
+                })
+                .mouseout(function () {
+                    $("#Password").attr("type", "password");
+                });
+            $("div.overout2")
                 .mouseover(function () {
                     $("#PasswordNueva").attr("type", "text");
                     $("#PasswordConfirmacion").attr("type", "text");

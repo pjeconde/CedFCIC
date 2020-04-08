@@ -51,8 +51,10 @@
                 <label asp-for="PasswordNueva" class="control-label"></label>
                 <div class="input-group">
                     <input asp-for="PasswordNueva" class="form-control" type="password" />
-                    <div class="input-group-addon ">
-                        <div class="glyphicon glyphicon-eye-open overout"></div>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <div class="fa fa-eye-slash overout"></div>
+                        </div>
                     </div>
                 </div>
                 <span asp-validation-for="PasswordNueva" class="text-danger"></span>
@@ -61,8 +63,10 @@
                 <label asp-for="PasswordConfirmacion" class="control-label"></label>
                 <div class="input-group">
                     <input asp-for="PasswordConfirmacion" class="form-control" type="password" />
-                    <div class="input-group-addon ">
-                        <div class="glyphicon glyphicon-eye-open overout"></div>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <div class="fa fa-eye-slash overout"></div>
+                        </div>
                     </div>
                 </div>
                 <span asp-validation-for="PasswordConfirmacion" class="text-danger"></span>

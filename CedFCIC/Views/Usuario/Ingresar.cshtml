@@ -9,40 +9,42 @@
 <h3>@ViewData["Message"]</h3>
 @if (sesion == null || sesion.Usuario == null || sesion.Usuario.Id == null)
 {
-<form asp-action="Ingresar" id="formLogin">
+    <form asp-action="Ingresar" id="formLogin">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Password" class="control-label"></label>
+                    <div class="input-group" id="show_hide_password">
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <div class="fa fa-eye-slash overout"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="submit" value="Aceptar" class="btn btn-outline-primary" />
+                    <a asp-action="Index" asp-controller="home" class="btn btn-outline-primary">Volver</a>
+                </div>
+            </div>
+        </div>
+    </form>
     <div class="container">
         <div class="row">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group col-md-6">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-6">
-                <label asp-for="Password" class="control-label"></label>
-                <div class="input-group">
-                    <input asp-for="Password" class="form-control" type="password" />
-                    <div class="input-group-addon ">
-                        <div class="glyphicon glyphicon-eye-open overout"></div>
-                    </div>
-                </div>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-12">
-                <input type="submit" value="Aceptar" class="btn btn-outline-primary" />
-                <a asp-action="Index" asp-controller="home" class="btn btn-outline-primary">Volver</a>
+            <div class="col-md-12">
+                <p style="text-align: center"><a asp-action="Crear" asp-controller="Usuario">Crear una nueva cuenta</a> - <a asp-action="CambiarClave" asp-controller="Usuario">Cambiar contraseña</a></p>
+                <p style="text-align: center"><a asp-action="OlvidoId" asp-controller="Usuario">¿Olvidó su Id.Usuario?</a> - <a asp-action="OlvidoClave" asp-controller="Usuario">¿Olvidó su Contraseña?</a> </p>
             </div>
         </div>
     </div>
-</form>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <p style="text-align: center"><a asp-action="Crear" asp-controller="Usuario">Crear una nueva cuenta</a> - <a asp-action="CambiarClave" asp-controller="Usuario">Cambiar contraseña</a></p>
-            <p style="text-align: center"><a asp-action="OlvidoId" asp-controller="Usuario">¿Olvidó su Id.Usuario?</a> - <a asp-action="OlvidoClave" asp-controller="Usuario">¿Olvidó su Contraseña?</a> </p>
-        </div>
-    </div>
-</div>
 }
 else
 {
@@ -63,16 +65,16 @@ else
 }
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>
-        $(document).ready(function () {
-            $("div.overout")
-                .mouseover(function () {
-                    $("#Password").attr("type", "text");
-                })
-                .mouseout(function () {
-                    $("#Password").attr("type", "password");
-                });
-        });
-    </script>
+    
+<script>
+    $(document).ready(function () {
+        $("div.overout")
+            .mouseover(function () {
+                $("#Password").attr("type", "text");
+            })
+            .mouseout(function () {
+                $("#Password").attr("type", "password");
+            });
+    });
+</script>
 }
