@@ -231,6 +231,36 @@ namespace CedFCIC.Controllers
             }
             return View(listaPrecioModel);
         }
+        [HttpGet]
+        public IActionResult IngresarPrecio()
+        {
+            ViewData["Cuit"] = "";
+            System.Data.DataTable dt = new System.Data.DataTable();
+            Entidades.Sesion sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
+            if (Funciones.SessionOK(sesion))
+            {
+                _RequestHandler.HandleAboutRequest();
+                sesion = HttpContext.Session.GetObj<Entidades.Sesion>("Sesion");
+                List<Entidades.ListaPrecio> listasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, true, sesion);
+                if (listasPrecio.Count == 0)
+                {
+                    ViewData["Ex"] = "No hay ninguna Lista de precios definida";
+                }
+                else
+                {
+                    dt = RN.Precio.Matriz(listasPrecio, sesion);
+                    //ActualizarGrilla();
+                }
+                ViewData["Message"] = "";
+                ViewData["Cuit"] = sesion.Cuit.Nro;
+            }
+            else
+            {
+                TempData["Ex"] = "Sesion finalizada por timeout.";
+                return RedirectToAction("Ingresar", "Usuario");
+            }
+            return View(dt);
+        }
         //[HttpGet]
         //public IActionResult Modificar(string cuit, string id)
         //{
